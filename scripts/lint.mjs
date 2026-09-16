@@ -1,0 +1,3 @@
+import { readFileSync,readdirSync,statSync } from 'node:fs';
+import { join } from 'node:path';
+const forbidden=/\bEMPLOYEE\b|Employee dashboard|employee login|employee permissions/i;const roots=['src','server','shared','supabase','tests'];const files=[];function walk(dir){for(const name of readdirSync(dir)){const p=join(dir,name);const s=statSync(p);if(s.isDirectory())walk(p);else files.push(p)}}roots.forEach(walk);for(const file of files){const text=readFileSync(file,'utf8');if(forbidden.test(text)){console.error(`Forbidden Employee terminology in ${file}`);process.exit(1)}}console.log('Lint checks passed');
