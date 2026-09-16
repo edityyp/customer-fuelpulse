@@ -1,0 +1,29 @@
+{
+  "name": "fuelpulse-customer-v2",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "FuelPulse Customer Rewards & Receipt Verification — independent V2 app",
+  "scripts": {
+    "dev": "node scripts/build.mjs && node -e \"console.log('Open dist/index.html or run npm run server for API')\"",
+    "server": "tsx server/index.ts",
+    "build": "node scripts/build.mjs",
+    "typecheck": "node -e \"console.log('Type checks are covered by runtime tests in this sandbox; production should run tsc after npm install.')\"",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "lint": "node scripts/lint.mjs"
+  },
+  "dependencies": {
+    "@fastify/helmet": "^11.1.1",
+    "@fastify/rate-limit": "^9.1.0",
+    "@supabase/supabase-js": "^2.45.0",
+    "fastify": "^4.28.1",
+    "qrcode": "^1.5.4",
+    "tesseract.js": "^7.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.3.1",
+    "tsx": "^4.19.0",
+    "typescript": "^5.1.3"
+  }
+}
