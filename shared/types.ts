@@ -1,0 +1,10 @@
+export type Role='USER'|'MANAGER'|'OWNER';
+export type ReceiptStatus='PENDING'|'VERIFIED'|'REDEEMED'|'EXPIRED'|'REJECTED'|'REVIEW_REQUIRED';
+export type VerificationDecision='APPROVED'|'REJECTED'|'REVIEW_REQUIRED';
+export type FuelProduct='Petrol'|'Diesel'|'CNG'|'Other';
+export interface UserProfile{user_id:string;name:string;mobile_number:string;status:'ACTIVE'|'SUSPENDED'|'PENDING';role:Role;station_id?:string}
+export interface Vehicle{vehicle_id:string;user_id:string;vehicle_number:string;vehicle_type:'Bike'|'Car'|'Truck'|'Auto'|'Other';nickname?:string;active:boolean}
+export interface FuelReceipt{id:string;invoice_number:string;receipt_token?:string|null;station_id:string;fcc_id?:string|null;fip_number?:string|null;nozzle_number?:string|null;product:FuelProduct;rate_per_litre:number;volume_litre:number;amount:number;vehicle_number?:string|null;mobile_number?:string|null;transaction_at:string;printed_at?:string|null;source:'POS_IMPORT'|'MANUAL_SEED'|'API';status:ReceiptStatus;redeemed_by?:string|null;redeemed_at?:string|null}
+export interface OcrReceiptFields{invoice_number?:string;receipt_token?:string;station_name?:string;station_id?:string;fcc_id?:string;fip_number?:string;nozzle_number?:string;product?:FuelProduct;rate_per_litre?:number;volume_litre?:number;amount?:number;vehicle_number?:string;mobile_number?:string;date?:string;time?:string;printed_at?:string}
+export interface RiskSignals{receipt_valid:boolean;receipt_expired:boolean;already_redeemed:boolean;vehicle_match:boolean;mobile_match:boolean|'NOT_PRESENT';invoice_match:boolean;amount_match:boolean;volume_match:boolean;station_match:boolean;timestamp_match:boolean;token_valid:boolean|'NOT_PRESENT';duplicate_attempt:boolean;velocity_anomaly:boolean;account_risk:boolean}
+export interface RedemptionResult{decision:VerificationDecision;userMessage:string;receiptId?:string;redemptionId?:string;pointsAwarded?:number;maskedInvoice?:string;maskedMobile?:string;signals:RiskSignals}
